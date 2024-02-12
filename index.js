@@ -1,6 +1,7 @@
 import openai from './config/open-ai.js';
 import readlineSync from 'readline-sync';
 import colors from 'colors';
+import fs from 'fs'
 
 async function main() {
   console.log(colors.bold.green('Welcome to the Chatbot Program!'));
@@ -36,7 +37,9 @@ async function main() {
       }
 
       console.log(colors.green('Bot: ') + completionText);
-
+      const content = completionText;
+      await fs.writeFile("text.txt", content);
+      
       // Update history with user input and assistant response
       chatHistory.push(['user', userInput]);
       chatHistory.push(['assistant', completionText]);
